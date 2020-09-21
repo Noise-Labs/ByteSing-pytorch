@@ -1,0 +1,16 @@
+# Tacotron 2 oddities
+logs-*/
+data/training_data/
+data/bb_dm001/
+data/demo/
+data/_pycache_/
+
+__pycache__/
+.idea/
+.vscode/
+*.mp3
+*.wav
+
+
+
+
