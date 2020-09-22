@@ -142,7 +142,7 @@ def build_from_path(input_dir, wav_dir, score_dir, duration_dir, n_jobs=12, tqdm
         sentence_duration = [] # 存储当前句子的各个音素duration信息（以sp为划分标准）
         score_index = -1 # 存储当前句子的乐谱音素查找下标
         silence_head = [False, 0]
-        compare_score_duration(durations, scores)
+        # compare_score_duration(durations, scores)
         # 根据乐谱中获取的信息，循环处理各音素
         for i in range(len(scores)):
             sentence_duration.append(durations[i])
@@ -182,8 +182,8 @@ def write_metadata(metadata, out_dir):
 def main():
     print('initializing preprocessing..')
     parser = argparse.ArgumentParser()
-    parser.add_argument('--base_dir', default='C:/Users/10569/Desktop/Code/ByteSing-pytorch/data')
-    parser.add_argument('--dataset', default='demo')
+    parser.add_argument('--base_dir', default='C:/Users/weiyayou/Desktop/Code/ByteSing-pytorch/data')
+    parser.add_argument('--dataset', default='DB-DM-001-F-001')
     parser.add_argument('--output', default='training_data')
     parser.add_argument('--n_jobs', type=int, default=cpu_count())
     args = parser.parse_args()
