@@ -31,7 +31,7 @@ _initials = ['b', 'p', 'f', 'm', \
 _finals = ['a',  'ai', 'ao',  'an',  'ang', \
            'o',  'ou', 'ong', \
            'e',  'ei', 'en',  'eng', 'er', 'ev', \
-           'i',  'ix', 'iii', \
+           'i',  'ii', 'iii', \
            'ia', 'iao','ian', 'iang','ie', \
            'in', 'ing','io',  'iou', 'iong', \
            'u',  'ua', 'uo',  'uai', 'uei', \
@@ -116,7 +116,7 @@ def split_pinyin(pinyin):
 
     # the final of "zi, ci, si" should be "ix"
     if initial in ['c', 's', 'z'] and final == 'i':
-      final = 'ix'
+      final = 'ii'
     # the final of "zhi, chi, shi, ri" should be "iy"
     elif initial in ['ch', 'r', 'sh', 'zh'] and final == 'i':
       final = 'iii'

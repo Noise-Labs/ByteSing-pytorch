@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import music21 as m21
-import pinyin
+from data import pinyin
 phonemes_table = []
 phonemes_position = []
 lyrics_table = []
@@ -58,8 +58,9 @@ def get_phoneme_duration(metadata_filename):
             else:
                 i = 0
                 temp = line.split('"')[1]
-                # if temp == 'sil' or temp == 'pau' or temp == "rest" or temp == "***sp":
-                #     temp = 'sp'
+                temp = temp.replace(" ", "")
+                if temp == 'sil':
+                    temp = 'sp'
                 durationOutput.append([temp, startTime, endTime])
                 if temp not in phonemes_table:
                     phonemes_table.append(temp)
@@ -105,7 +106,7 @@ def get_all_information():
     return songs
 
 def get_interval():
-    path = 'C:/Users/weiyayou/Desktop/DB-DM-001-F-001/Interval'
+    path = 'C:/Users/10569/Desktop/Code/ByteSing-pytorch/data/DB-DM-001-F-001/Interval'
     songs = []
     for files in os.listdir(path):
         songs.append(get_phoneme_duration(os.path.join(path, files)))
@@ -128,10 +129,10 @@ def compare(songs, songs_interval, start_id):
         start_id += 1
 
 def main():
-    songs = get_all_information()
+    # songs = get_all_information()
     songs_interval = get_interval()
     print(phonemes_table)
-    print(phonemes_position)
+    # print(phonemes_position)
     phonemes_table.sort()
     print(phonemes_table)
     # compare(songs, songs_interval, 9)
