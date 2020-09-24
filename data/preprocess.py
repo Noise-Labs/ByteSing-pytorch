@@ -216,31 +216,18 @@ def build_from_path(input_dir, wav_dir, score_dir, duration_dir, n_jobs=12, tqdm
                 else:
                     wav = get_second_part_wave(song, sentence_duration[0][0], sentence_duration[-1][1])
                 while True:
-                    # if i == 0:
-                    #     silence_head = [True, sentence_duration[0][1]]
-                    #     song = song[int(silence_head[1]*1000):]
-                    #     sentence_duration = []
-                    #     if scores[0][3] != 'sp':                        
-                    #         break
-                    #     else:
-                    #         score_index += 1
-                    #         break
                     score_index += 1
-                    # if score_index == len(scores):
-                    #     futures.append(executor.submit(partial(audio_process_utterance, wav_dir,\
-                    #         duration_dir, score_dir, basename + '-' + str(index), wav, sentence_duration, sentence_score)))
-                    #     index += 1
-                    #     sentence_duration = []
-                    #     break
                     sentence_score.append(scores[score_index])
                     if scores[score_index][3] == 'sp'  or score_index == len(scores) - 1:
-                        futures.append(executor.submit(partial(audio_process_utterance, wav_dir,\
-                            duration_dir, score_dir, basename + '-' + str(index), wav, sentence_duration, sentence_score)))
+                        # futures.append(executor.submit(partial(audio_process_utterance, wav_dir,\
+                        #     duration_dir, score_dir, basename + '-' + str(index), wav, sentence_duration, sentence_score)))
+                        futures.append(audio_process_utterance(wav_dir, duration_dir, score_dir, basename + '-' + str(index), wav, sentence_duration, sentence_score))
                         index += 1
                         sentence_duration = []
                         break
             
-    return [future.result() for future in tqdm(futures) if future.result() is not None]
+    # return [future.result() for future in tqdm(futures) if future.result() is not None]
+    return futures
     # return 0
 
 def write_metadata(metadata, out_dir):
